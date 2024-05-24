@@ -36,12 +36,17 @@ path = 'E:\\桌面文件管理\\LisM\\music_mp3'
 
 # for i in range(len(id_list)):
 
-for i in range(50):
+for i in range(200):
     # 完整下载链接
     flag = 0
     music_url = url_base + id_list[i]
     # 对应歌曲名称
     music_name = name_list[i]
+    separator = ' '
+
+    music_name = music_name.split(separator, 1)[0]
+    # print(music_name)  # 👉️ 'fql'
+
     filenames = os.listdir(path)
     for name in filenames:
         name = name.split(".")[0]  # 去后缀名
@@ -73,19 +78,15 @@ for i in range(50):
                 print("insert erro！")
                 db.close()
             #
-            #转为wav保存
-            ### 参数1：音频路径， 参数2：转换后的格式
-            song = AudioSegment.from_mp3("E:\\桌面文件管理\\LisM\\music_mp3/%s.mp3" % music_name)
-            song.export("E:\\桌面文件管理\\LisM\\music_wav/%s." % music_name + str("wav"), format=str("wav"))
+            # #转为wav保存
+            # ### 参数1：音频路径， 参数2：转换后的格式
+            # try:
+            #     song = AudioSegment.from_mp3("E:\\桌面文件管理\\LisM\\music_mp3/%s.mp3" % music_name)
+            #     song.export("E:\\桌面文件管理\\LisM\\music_wav/%s." % music_name + str("wav"), format=str("wav"))
+            # except:
+            #     print("Error:%s .mp3转化出错" % music_name)#判断出错，删去最后一首记录？重新执行？
+            #     song.export("E:\\桌面文件管理\\LisM\\music_wav/%s." % music_name + str("wav"), format=str("wav"))
             #
-            # sound = AudioSegment.from_file("E:\\桌面文件管理\\LisM\\music_mp3/%s.mp3" % music_name, format='MP3')
-            # f = wave.open("E:\\桌面文件管理\\LisM\\music_wav/%s.wav" % music_name, 'wb')
-            # f.setnchannels(1)  # 频道数
-            # f.setsampwidth(2)  # 量化位数
-            # f.setframerate(16000)  # 取样频率
-            # f.setnframes(len(sound._data))  # 取样点数，波形数据的长度
-            # f.writeframes(sound._data)  # 写入波形数据
-            # f.close()#
 
         file.close()
 

@@ -202,11 +202,6 @@ def thread_it(func, *args):
     t.start()
 
 
-window = Tk()
-window.geometry('500x350')
-window.title('语音识别')
-t = Text(window, bg='pink')  # 文本框
-t.pack()
 
 # lambda匿名函数
 """
@@ -215,9 +210,102 @@ def thread_it(run,):
     t.setDaemon(True)
     t.start()
 """
-tkinter.Button(window, text='开始', command=lambda: thread_it(run, )).place(x=230, y=315)
 
-window.mainloop()
-#强行停止
+
+from tkinter import *
+
+import pymysql
+from playsound import playsound
+from ttkbootstrap import Style
+import ttkbootstrap as ttk
+from  ttkbootstrap.constants import *
+import os
+
+import tkinter as tk
+from PIL import Image, ImageTk
+from tkinter import ttk
+
+root = Tk()
+
+root.title("歌曲查询")
+root.geometry("300x300")
+# 输入框
+# text = tk.Text(root)
+# text.configure(height=2,width=30)
+#
+# text.place(x=30,y=0)
+
+# 语音按钮点击——开始识别
+
+
+
+# 加载图片
+photo = Image.open("drawable/语音.png")  # 括号里为需要显示在图形化界面里的图片
+photo = photo.resize((20, 20))  # 规定图片大小
+img0 = ImageTk.PhotoImage(photo)
+
+
+
+#图片点击事件
+button=tk.Button(root, image=img0, command=lambda: thread_it(run, ))
+button.place(x=250, y=15)
+
+# import ttkbootstrap as ttk
+# from ttkbootstrap.constants import *
+# e2 = ttk.Entry(root,width=30,bootstyle=PRIMARY)
+# e2.grid(row=10, column=1, sticky=ttk.W, padx=10, pady=10)
+#
+# # 文字处理——去除符号、空格
+# def remove_special_characters(text):
+#     # 使用列表推导式删除特殊字符和标点符号
+#     special_chars = [char for char in text if char.isalnum() or char.isspace()]
+#     # 拼接列表中的字符并返回处理后的字符串
+#     clean_text = ''.join(special_chars)
+#     return clean_text
+#
+# def remove_spaces(text):
+#     # 使用replace函数将空格替换为空字符串
+#     text = text.replace(' ', '')
+#     return text
+#
+#
+# def get_entry_contetn():
+#     # 调用函数删除特殊字符和标点符号
+#     clean_string = remove_special_characters(e2.get())
+#     # 调用函数删除空格
+#     clean_string = remove_spaces(clean_string)
+#     print("e2: ",clean_string)
+#
+#     # 连接数据库查询歌曲
+#     db = pymysql.connect(host='localhost', user='root', password='123456', database='user')
+#     # 使用 cursor() 方法创建一个游标对象 cursor
+#     cursor = db.cursor()
+#     # 使用 execute()  方法执行 SQL
+#     result = clean_string.strip('\n')
+#     print(result)
+#     cursor.execute("select url from music where title='%s'" % result)
+#     # 使用 fetchone() 方法获取单条数据.
+#     data = cursor.fetchone()
+#     print('%s' % data)
+#     # 播放
+#     # playsound('E:\桌面文件管理\LisM\music_mp3\紫荆花盛开.mp3')
+#     playsound('%s' % data)
+#     # 关闭数据库连接
+#     db.close()
+#
+#
+# button1=ttk.Button(root,text="查询", bootstyle=(PRIMARY, "outline-toolbutton"),command=get_entry_contetn).grid(row=20, column=1, sticky=ttk.W, padx=10, pady=10)
+#
+#
+# # #分割线
+# # text1="------------------------------"
+# # # 显示图片
+# # label1 = Label(root, text=text1)
+# # label1.place(x=0,y=50)
+
+root.mainloop()
+
+
+# #强行停止
 while(1):
     pass
